@@ -1,7 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Doco Doco Pochette</title>
+
 <script src="/ddp/client.js"></script>
-<script src="/kjs/konashi-bridge.min.js"></script>
+<script src="/lib/konashi-bridge.min.js"></script>
 <script src="/lib/zepto.min.js"></script>
 <script type="text/javascript">
-  var client = new Faye.Client('http://localhost:8000/ddp');
+  var client = new Faye.Client('/ddp');
   client.publish('/foo', {text: 'Hi there'});
+  console.log("sent");
 </script>
+
+</head>
+<body>
+ <div id="message1" />
+</body>
+</html>

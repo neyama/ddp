@@ -1,11 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Doco Doco Pochette</title>
+
+<!--
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+-->
+
 <script src="/ddp/client.js"></script>
-<script src="/kjs/konashi-bridge.min.js"></script>
+<script src="/lib/konashi-bridge.min.js"></script>
 <script src="/lib/zepto.min.js"></script>
+<script src="/lib/fx.js"></script>
+<!--
+<script src="/lib/fx_methods.js"></script>
+-->
+
+</head>
+<body>
+ <div id="message1" />
+ <img id="image1" src="images/guy.png" style="display:none"/>
 
 <script type="text/javascript">
-  var client = new Faye.Client('http://localhost:8000/ddp');
+Zepto(function($){
+  konashi_on = true;
+
+  $("#image1").hide();
+  var client = new Faye.Client('/ddp');
   client.subscribe('/foo', function(message) {
     console.log(message);
-    console.log('hogehoge');
-  })
+    $("#message1").append($("<p />", { text:message }));
+    //$("#image1").animate({ opacity: 0.25, left: '50px', color: '#abcdef', rotateZ: '45deg', translate3d: '0,10px,0' }, 500, 'ease-out');
+    image1 = $("#image1");
+    image1.show().animate({ opacity: 0.25, left: '50px', color: '#abcdef', rotateZ: '45deg', translate3d: '0,10px,0' }, 500, 'ease-out', function(){ image1.removeAttr("style"); image1.hide(); });
+  });
+
+  if (konashi_on) {
+    k.on(k.KONASHI_EVENT_READY, function(){
+      console.log("#konashiの準備が整ったようです！さあ使っていこう");
+    });
+    k.find();
+  }
+});
 </script>
+
+</body>
+</html>

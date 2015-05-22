@@ -3,6 +3,7 @@ How to setup
 2. npm install connect serve-static faye
 3. cd ~/work
 4. git clone https://github.com/YUKAI/konashi-js-sdk
+5. git clone https://github.com/madrobby/zepto
 5. curl http://zeptojs.com/zepto.min.js -o zepto.min.js
 6. cd ddp/doc_root/lib
 7. ln -s ../../../zepto.min.js .
