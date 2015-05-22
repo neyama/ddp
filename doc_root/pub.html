@@ -7,9 +7,11 @@
 <script src="/lib/konashi-bridge.min.js"></script>
 <script src="/lib/zepto.min.js"></script>
 <script type="text/javascript">
+Zepto(function($){
   var client = new Faye.Client('/ddp');
   client.publish('/foo', {text: 'Hi there'});
   console.log("sent");
+});
 </script>
 
 </head>
