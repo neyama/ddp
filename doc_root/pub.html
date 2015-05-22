@@ -1,0 +1,7 @@
+<script src="/ddp/client.js"></script>
+<script src="/kjs/konashi-bridge.min.js"></script>
+<script src="/lib/zepto.min.js"></script>
+<script type="text/javascript">
+  var client = new Faye.Client('http://localhost:8000/ddp');
+  client.publish('/foo', {text: 'Hi there'});
+</script>

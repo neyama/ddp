@@ -1,0 +1,11 @@
+<script src="/ddp/client.js"></script>
+<script src="/kjs/konashi-bridge.min.js"></script>
+<script src="/lib/zepto.min.js"></script>
+
+<script type="text/javascript">
+  var client = new Faye.Client('http://localhost:8000/ddp');
+  client.subscribe('/foo', function(message) {
+    console.log(message);
+    console.log('hogehoge');
+  })
+</script>
