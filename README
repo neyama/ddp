@@ -1,0 +1,6 @@
+How to setup
+1. brew install node
+2. npm install connect serve-static faye
+3. git clone https://github.com/YUKAI/konashi-js-sdk
+4. curl http://zeptojs.com/zepto.min.js -o zepto.min.js
+
