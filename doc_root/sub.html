@@ -20,10 +20,15 @@
 <body>
  <div id="message1" />
  <img id="image1" src="images/guy.png" style="display:none"/>
+ <audio id="sound1">
+   <source src="sounds/seikai.mp3">
+ </audio>
 
 <script type="text/javascript">
 Zepto(function($){
-  konashi_on = true;
+  var konashi_on = false;
+
+  var _sound1 = document.getElementById('sound1');
 
   $("#image1").hide();
   var client = new Faye.Client('/ddp');
@@ -31,6 +36,7 @@ Zepto(function($){
     console.log(message);
     $("#message1").append($("<p />", { text:message }));
     //$("#image1").animate({ opacity: 0.25, left: '50px', color: '#abcdef', rotateZ: '45deg', translate3d: '0,10px,0' }, 500, 'ease-out');
+    _sound1.play();
     image1 = $("#image1");
     image1.show().animate({ opacity: 0.25, left: '50px', color: '#abcdef', rotateZ: '45deg', translate3d: '0,10px,0' }, 500, 'ease-out', function(){ image1.removeAttr("style"); image1.hide(); });
   });
