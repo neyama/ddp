@@ -2,7 +2,7 @@ DppClient = function(userId) {
     this.userId = userId;
     this.client = new Faye.Client('/ddp');
     this.handlers = {
-	join: function(message) {
+	"join": function(message) {
 	    // 自分でなければ
 	    if (message.userId != this.userId) {
 		// 既知のメンバーではなければ
@@ -16,7 +16,7 @@ DppClient = function(userId) {
 		members(message.userId) = Date.now();
 	    }
 	},
-	leave: function(message) {
+	"leave": function(message) {
 	    // 既知のメンバーであれば
 	    if (message.userId in this.members) {
 		delete members(message.userId);
@@ -26,7 +26,7 @@ DppClient = function(userId) {
 		}
 	    }
 	},
-	trash: function(message) {
+	"trash": function(message) {
 	    // 既知のメンバーであれば
 	    if (message.userId in this.members) {
 		members(message.userId) = Date.now();
@@ -36,7 +36,7 @@ DppClient = function(userId) {
 		}
 	    }
 	},
-	keep_alive: function(message) {
+	"keep_alive": function(message) {
 	    if (message.userId in this.members) {
 		members(message.userId) = Date.now();
 	    } else {
@@ -47,7 +47,7 @@ DppClient = function(userId) {
 		}
 	    }
 	},
-	move: function(message) {
+	"move": function(message) {
 	    if (message.userId in this.members) {
 		members(message.userId) = Date.now();
 		if (message.type in this.appHandlers) {
