@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<script src="/ddp/client.js"></script>
+<script src="lib/konashi-bridge.min.js"></script>
+<script src="lib/zepto.min.js"></script>
+<script src="js/dpp_client.js"></script>
+<head>
+<title>Doco Doco Pochette</title>
+</head>
+<body>
+  <div id="message1" />
+  <script>
+    Zepto(function($) {
+    $("#message1").append($("<p />", { text:"ready" }));
+    client = DppClient("papa");
+    $("#message1").append($("<p />", { text:"create" }));
+    client.start();
+    $("#message1").append($("<p />", { text:"start" }));
+    });
+  </script>
+</body>
