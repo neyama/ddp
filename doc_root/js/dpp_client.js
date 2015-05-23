@@ -14,13 +14,13 @@ DppClient = function(userId) {
 		    }
 		    origThis.send("keep_alive", {});
 		}
-		members(message.userId) = Date.now();
+		members[message.userId] = Date.now();
 	    }
 	},
 	leave: function(message) {
 	    // 既知のメンバーであれば
 	    if (message.userId in origThis.members) {
-		delete members(message.userId);
+		delete members[message.userId];
 		if (message.type in origThis.appHandlers) {
 		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId);
@@ -30,7 +30,7 @@ DppClient = function(userId) {
 	trash: function(message) {
 	    // 既知のメンバーであれば
 	    if (message.userId in origThis.members) {
-		members(message.userId) = Date.now();
+		members[message.userId] = Date.now();
 		if (message.type in origThis.appHandlers) {
 		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);
@@ -39,9 +39,9 @@ DppClient = function(userId) {
 	},
 	keep_alive: function(message) {
 	    if (message.userId in origThis.members) {
-		members(message.userId) = Date.now();
+		members[message.userId] = Date.now();
 	    } else {
-		members(message.userId) = Date.now();
+		members[message.userId] = Date.now();
 		if (message.type in origThis.appHandlers) {
 		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);
@@ -50,7 +50,7 @@ DppClient = function(userId) {
 	},
 	move: function(message) {
 	    if (message.userId in origThis.members) {
-		members(message.userId) = Date.now();
+		members[message.userId] = Date.now();
 		if (message.type in origThis.appHandlers) {
 		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);
