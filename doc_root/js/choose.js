@@ -1,10 +1,10 @@
+
 var sound1;
 var k;
 Zepto(function($){
-	//var client = new Faye.Client('/ddp');
-	//$("#message1").append($("<p />", { text:"ready" }));
-	//client.publish('/foo', {text: 'Hi there'});
-	//$("#message1").append($("<p />", { text:"sent" }));
+	$('#ring').hide()
+	var myObj = this;
+	myObj.client = {};
 	$('#home').hide();
 	$('.tiled').on('click',
 		function(){
@@ -24,8 +24,10 @@ Zepto(function($){
 					this.room = 'room4';
 				break;
 			}
-			client = new DppClient(this.id,this.room);
-			client.start();
+			hoge = Math.floor(Math.random()*10000);
+			
+			myObj.client[hoge] = new DppClient(this.id,this.room);
+			myObj.client[hoge].start();
 		}
 	);
 
