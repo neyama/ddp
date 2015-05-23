@@ -63,11 +63,11 @@ DppClient = function(userId) {
 DppClient.prototype = {
     start: function() {
 	this.client.subscribe(DppClient.TOPIC, function(message) {
-	    if (!message.type in this.handlers) {
+	    if (!message.type in DppClient.this.handlers) {
 		console.warn("Unknown message type: " + message.type);
 		return;
 	    }
-	    handler = this.handlers(message.type);
+	    handler = DppClient.this.handlers(message.type);
 	    handler(message);
 	});
 	this.send("join", {});
