@@ -1,57 +1,58 @@
 DppClient = function(userId) {
     this.userId = userId;
     this.client = new Faye.Client('/ddp');
+    origThis = this;
     this.handlers = {
-	"join": function(message) {
+	join: function(message) {
 	    // 自分でなければ
-	    if (message.userId != this.userId) {
+	    if (message.userId != origThis.userId) {
 		// 既知のメンバーではなければ
-		if (!message.userId in this.members) {
-		    if (message.type in this.appHandlers) {
-			appHandler = this.appHandlers(message.type);
+		if (!message.userId in origThis.members) {
+		    if (message.type in origThis.appHandlers) {
+			appHandler = origThis.appHandlers[message.type];
 			appHandler(message.userId);
 		    }
-		    this.send("keep_alive", {});
+		    origThis.send("keep_alive", {});
 		}
 		members(message.userId) = Date.now();
 	    }
 	},
-	"leave": function(message) {
+	leave: function(message) {
 	    // 既知のメンバーであれば
-	    if (message.userId in this.members) {
+	    if (message.userId in origThis.members) {
 		delete members(message.userId);
-		if (message.type in this.appHandlers) {
-		    appHandler = this.appHandlers(message.type);
+		if (message.type in origThis.appHandlers) {
+		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId);
 		}
 	    }
 	},
-	"trash": function(message) {
+	trash: function(message) {
 	    // 既知のメンバーであれば
-	    if (message.userId in this.members) {
+	    if (message.userId in origThis.members) {
 		members(message.userId) = Date.now();
-		if (message.type in this.appHandlers) {
-		    appHandler = this.appHandlers(message.type);
+		if (message.type in origThis.appHandlers) {
+		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);
 		}
 	    }
 	},
-	"keep_alive": function(message) {
-	    if (message.userId in this.members) {
+	keep_alive: function(message) {
+	    if (message.userId in origThis.members) {
 		members(message.userId) = Date.now();
 	    } else {
 		members(message.userId) = Date.now();
-		if (message.type in this.appHandlers) {
-		    appHandler = this.appHandlers(message.type);
+		if (message.type in origThis.appHandlers) {
+		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);
 		}
 	    }
 	},
-	"move": function(message) {
-	    if (message.userId in this.members) {
+	move: function(message) {
+	    if (message.userId in origThis.members) {
 		members(message.userId) = Date.now();
-		if (message.type in this.appHandlers) {
-		    appHandler = this.appHandlers(message.type);
+		if (message.type in origThis.appHandlers) {
+		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);
 		}
 	    }
@@ -68,7 +69,7 @@ DppClient.prototype = {
 		console.warn("Unknown message type: " + message.type);
 		return;
 	    }
-	    handler = origThis.handlers(message.type);
+	    handler = origThis.handlers[message.type];
 	    handler(message);
 	});
 	this.send("join", {});
