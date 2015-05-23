@@ -12,7 +12,7 @@
   <script>
     Zepto(function($) {
     $("#message1").append($("<p />", { text:"ready" }));
-    client = DppClient("papa");
+    client = new DppClient("papa");
     $("#message1").append($("<p />", { text:"create" }));
     client.start();
     $("#message1").append($("<p />", { text:"start" }));

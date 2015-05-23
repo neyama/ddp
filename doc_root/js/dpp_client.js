@@ -74,8 +74,8 @@ DppClient.prototype = {
     },
 
     send: function(type, message) {
-	message("type") = type;
-	message("userId") = this.userId;
+	message.type = type;
+	message.userId = this.userId;
 	this.client.publish(DppClient.TOPIC, message);
     },
 
