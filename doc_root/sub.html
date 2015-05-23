@@ -58,6 +58,9 @@ Zepto(function($) {
     });
     $("#message1").append($("<p />", { text:"looking for konashi" }));
 */
+    k.on(k.KONASHI_EVENT_PERIPHERAL_NOT_FOUND, function() {
+      $("#message1").append($("<p />", { text:"not found" }));
+    });
     k.findWithName("konashi#4-1903");
   }
 
