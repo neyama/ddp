@@ -16,6 +16,15 @@ DppClient = function(userId,roomID) {
 			    }
 			    origThis.send("keep_alive", {});
 			}
+			var room = origThis.roomId;
+			var w = $('#' + room).css('top');
+			var h = $('#' + room).css('left');
+			console.log(room);
+			console.log(w);
+			console.log(h);
+			$('#ring').css('top',w);
+			$('#ring').css('left',h);
+			$('#ring').show();
 			origThis.members[message.userId] = Date.now();
 	    }
 	},
