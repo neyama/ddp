@@ -44,16 +44,21 @@ Zepto(function($) {
   });
 
   if (isKonashiJS()) {
-    k.ready(function() {
-      $("#message1").append($("<p />", { text:"konashi.js ready" }));
+    $("#message1").append($("<p />", { text:"registering konashi handlers" }));
+    k.on(k.KONASHI_EVENT_READY, function() {
+      $("#message1").append($("<p />", { text:"event ready" }));
       sound1.load();
       $("#message1").append($("<p />", { text:"loaded sound" }));
     });
-    $("#message1").append($("<p />", { text:"setup konashi.js" }));
-    k.on(k.KONASHI_EVENT_READY, function(){
-      console.log("#konashi‚Ì€”õ‚ª®‚Á‚½‚æ‚¤‚Å‚·I‚³‚ g‚Á‚Ä‚¢‚±‚¤");
+/*
+    k.ready(function() {
+      $("#message1").append($("<p />", { text:"event ready" }));
+      //sound1.load();
+      $("#message1").append($("<p />", { text:"loaded sound" }));
     });
-    //k.find();
+    $("#message1").append($("<p />", { text:"looking for konashi" }));
+*/
+    k.findWithName("konashi#4-1903");
   }
 
   $("#message1").append($("<p />", { text:"ready" }));
