@@ -1,20 +1,22 @@
-DppClient = function(userId) {
+DppClient = function(userId,roomID) {
     this.userId = userId;
+    this.roomId = roomID;
     this.client = new Faye.Client('/ddp');
     origThis = this;
     this.handlers = {
 	join: function(message) {
 	    // 自分でなければ
 	    if (message.userId != origThis.userId) {
-		// 既知のメンバーではなければ
-		if (!message.userId in origThis.members) {
-		    if (message.type in origThis.appHandlers) {
-			appHandler = origThis.appHandlers[message.type];
-			appHandler(message.userId);
-		    }
-		    origThis.send("keep_alive", {});
-		}
-		members[message.userId] = Date.now();
+	    	$('#ring').hide();
+			// 既知のメンバーではなければ
+			if (!message.userId in origThis.members) {
+			    if (message.type in origThis.appHandlers) {
+				appHandler = origThis.appHandlers[message.type];
+				appHandler(message.userId);
+			    }
+			    origThis.send("keep_alive", {});
+			}
+			origThis.members[message.userId] = Date.now();
 	    }
 	},
 	leave: function(message) {
@@ -30,7 +32,7 @@ DppClient = function(userId) {
 	trash: function(message) {
 	    // 既知のメンバーであれば
 	    if (message.userId in origThis.members) {
-		members[message.userId] = Date.now();
+		origThis.members[message.userId] = Date.now();
 		if (message.type in origThis.appHandlers) {
 		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);
@@ -39,9 +41,9 @@ DppClient = function(userId) {
 	},
 	keep_alive: function(message) {
 	    if (message.userId in origThis.members) {
-		members[message.userId] = Date.now();
+		origThis.members[message.userId] = Date.now();
 	    } else {
-		members[message.userId] = Date.now();
+		origThis.members[message.userId] = Date.now();
 		if (message.type in origThis.appHandlers) {
 		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);
@@ -50,7 +52,7 @@ DppClient = function(userId) {
 	},
 	move: function(message) {
 	    if (message.userId in origThis.members) {
-		members[message.userId] = Date.now();
+		origThis.members[message.userId] = Date.now();
 		if (message.type in origThis.appHandlers) {
 		    appHandler = origThis.appHandlers[message.type];
 		    appHandler(message.userId, message.roomId);

@@ -9,13 +9,15 @@
 <script src="/lib/konashi-bridge.min.js"></script>
 <script src="/lib/zepto.min.js"></script>
 <script src="/js/choose.js"></script>
+<script src="/js/dpp_client.js"></script>
+
 </head>
 <body>
 <div id='buttons'>
-  <div class="tiled"><img class="tiledImg" id='musuko' src="images/boku_face.png"></div>
-  <div class="tiled"><img class="tiledImg" id='musume' src="images/me_face.png"></div>
-  <div class="tiled"><img class="tiledImg" id='mama' src="images/mama_face.png"></div>
-  <div class="tiled"><img class="tiledImg" id='papa' src="images/papa_face.png"></div>
+  <div id='musuko' name='romm2' class="tiled"><img class="tiledImg" src="images/boku_face.png"></div>
+  <div id='musume' name='room4' class="tiled"><img class="tiledImg"  src="images/me_face.png"></div>
+  <div id='mama'   name='room3' class="tiled"><img class="tiledImg" src="images/mama_face.png"></div>
+  <div id='papa'   name='room1' class="tiled"><img class="tiledImg" src="images/papa_face.png"></div>
 </div>
 
 <div id="message1"/>
@@ -27,7 +29,7 @@
 	<div id='room4'>room4</div>
 	<div id='room5'>room5</div>
 	<div id='room6'>room6</div>
-	<img id='ring' src='/images/ring.png' style='display:block;'>
+	<img id='ring' src='/images/ring.png'>
 <!--
 	<button id='button1' >1</button>
 	<button id='button2' >2</button>
