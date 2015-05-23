@@ -1,0 +1,48 @@
+#home{
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+}
+
+#imgHome{
+	width:500px;
+	height:300px;
+}
+
+#ring{
+	left:20px;
+	top:20px;
+	width:100px;
+	height:100px;
+	position:absolute;
+}
+
+#room1{
+	left:20px;
+	top:40px;
+	position:absolute;
+}
+#room2{
+	left:20px;
+	top:260px;
+	position:absolute;
+}
+#room3{
+	left:240px;
+	top:40px;
+	position:absolute;
+}
+#room4{
+	left:240px;
+	top:260px;
+	position:absolute;
+}
+#room5{
+	left:410px;
+	top:40px;
+	position:absolute;
+}
+#room6{
+	left:410px;
+	top:260px;
+	position:absolute;
+}

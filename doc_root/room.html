@@ -1,0 +1,33 @@
+<div id="message1" />
+
+<script type="text/javascript">
+Zepto(function($){
+  var client = new Faye.Client('/ddp');
+  $("#message1").append($("<p />", { text:"ready" }));
+  client.publish('/foo', {text: 'Hi there'});
+  $("#message1").append($("<p />", { text:"sent" }));
+});
+/*
+$(function(){
+	
+});
+*/
+</script>
+<div id='home'>
+<img id='imgHome' src='/images/bg.jpg' alt='見取り図'>
+<div id='room1'>room1</div>
+<div id='room2'>room2</div>
+<div id='room3'>room3</div>
+<div id='room4'>room4</div>
+<div id='room5'>room5</div>
+<div id='room6'>room6</div>
+<img id='ring' src='/images/ring.png' style='display:block;'  >
+</div>
+<button id='button1' >1</button>
+<button id='button2' >2</button>
+<button id='button3' >3</button>
+<button id='button4' >4</button>
+<button id='button5' >5</button>
+<button id='button6' >6</button>
+</body>
+</html>
