@@ -7,13 +7,28 @@ DppClient = function(userId,roomID) {
     var origThis = this;
     this.handlers = {
 		join: function(message) {
-			console.log('origThis');
-			console.log(origThis);
-			console.log('message');
-			console.log(message);
 		    // 自分以外
 		    if (message.userId != origThis.userId) {
 		    	$('#ring').hide();
+
+		  //   	//音を出す
+	   //  		var isConnect = k.findWithName("konashi#4-1903");
+
+			 //  	if (isKonashiJS()) {
+				//  //    k.on(k.KONASHI_EVENT_READY, function() {
+			 //  //   	  sound1 = new Audio("http://jsrun.it/assets/f/s/a/J/fsaJx.mp3");
+				//  //      sound1.load();
+				//  //      sound1.play();
+				// 	// });
+				// 	// k.ready(function(){
+				// 	// 	sound1 = new Audio("http://jsrun.it/assets/f/s/a/J/fsaJx.mp3");
+				// 	// 	sound1.load();
+				// 	// 	sound1.play();
+				// 	// });
+				// }
+
+
+
     		    //joinしてきた人の位置を表示する
     		    beacon(message.roomid);
 			    // origThis.client.publish(DppClient.TOPIC, message);
@@ -73,30 +88,42 @@ DppClient = function(userId,roomID) {
     };
 	function beacon(roomid){
 
-	var w = $('#' + roomid).css('top');
-	var h = $('#' + roomid).css('left');
-	//left - 35
-	//top - 25
+		var top = $('#' + roomid).css('top');
+		var left = $('#' + roomid).css('left');
+		//Todo 表示位置を修正する
+		// top,left には "100px"　のように値が入る。
+		//正規表現で合致した部分を置換して、型変換、して計算、さらに文字列型に変更して戻す。
 
-	$('#ring').css('top',w);
-	$('#ring').css('left',h);
-	var interval = setInterval(
-		function(){
-			$('#ring').toggle();
-		},1000
-	);
-	
-	var clear = function(){
-		clearInterval(interval);
-		$('#ring').hide();
-	};
-	setTimeout(clear,5000);
+		top = Number(top.replace(/px/,"")) - 35;
+		left = Number(left.replace(/px/,"")) - 25;
 
-}
+		top  = String(top) + 'px';
+		left = String(left) +'px';
+
+
+		$('#ring').css('top',top);
+		$('#ring').css('left',left);
+
+		var interval = setInterval(
+			function(){
+				$('#ring').toggle();
+			},1000
+		);
+		
+		var clear = function(){
+			clearInterval(interval);
+			$('#ring').hide();
+		};
+
+		setTimeout(clear,3000);
+
+	}
 
 };
 DppClient.prototype = {
+
     start: function() {
+
 		origThis = this;
 		//subを設定する
 		this.client.subscribe(DppClient.TOPIC, function(message) {

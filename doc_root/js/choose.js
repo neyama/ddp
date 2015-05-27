@@ -26,20 +26,29 @@ Zepto(function($){
 			}
 			hoge = Math.floor(Math.random()*10000);
 			
+    		var isConnect = k.findWithName("konashi#4-1903");
+
 			myObj.client[hoge] = new DppClient(this.id,this.room);
+
 			myObj.client[hoge].start();
-		}
-	);
 
 
-  	if (isKonashiJS()) {
-	    // $("#message1").append($("<p />", { text:"registering konashi handlers" }));
-	    k.on(k.KONASHI_EVENT_READY, function() {
-    	  sound1 = new Audio("http://jsrun.it/assets/f/s/a/J/fsaJx.mp3");
-	      // $("#message1").append($("<p />", { text:"event ready" }));
-	      sound1.load();
-	      // $("#message1").append($("<p />", { text:"loaded sound" }));
-	    });
+	    	//konashiを認識したらクライアント側がスタートする　TODO
+
+		 //  	if (isKonashiJS()) {
+			//     k.on(k.KONASHI_EVENT_READY, function(myObj,hoge) {
+			// 		myObj.client[hoge] = new DppClient(this.id,this.room);
+
+			// 		myObj.client[hoge].start();
+
+			// 		sound1 = new Audio("http://jsrun.it/assets/f/s/a/J/fsaJx.mp3");
+			// 		sound1.load();
+			// 		sound1.play();
+			// 	});
+			// }
+
+
+	});
 /*
     k.ready(function() {
       $("#message1").append($("<p />", { text:"event ready" }));
@@ -48,14 +57,14 @@ Zepto(function($){
     });
     $("#message1").append($("<p />", { text:"looking for konashi" }));
 */
-    	var isConnect = k.findWithName("konashi#4-1903");
+
     	// alert(isConnect);
     	// if(isConnect === 0){
     	// 	alert('OK');
     	// }else{
     	// 	alert('fail');
     	// }
-	}
+	// }
 
 });
 
